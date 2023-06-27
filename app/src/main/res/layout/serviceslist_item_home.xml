@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemClickListener"
+            type="com.gox.app.adapter.CustomClickListner" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvServiceIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->itemClickListener.onListClickListner()}"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="@dimen/_2sdp"
+            app:cardElevation="@dimen/_3sdp"
+            android:layout_margin="@dimen/_2sdp"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/service_icon_imgv"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/service_image"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/ic_sedan_car_model" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/service_name_tv"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:text="@string/dummy_servicename"
+            android:textSize="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+</layout>

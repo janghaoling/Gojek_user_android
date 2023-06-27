@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="homefragmentmodel"
+            type="com.gox.app.ui.home_fragment.HomeFragmentViewModel" />
+
+        <variable
+            name="serviceListAdapter"
+            type="com.gox.app.adapter.ServiceListAdapter" />
+
+        <variable
+            name="homeCouponAdapter"
+            type="com.gox.app.ui.home_fragment.HomeCouponAdapter" />
+
+        <variable
+            name="offersCouponsAdapter"
+            type="com.gox.app.adapter.OffersCouponsAdapter" />
+
+
+        <variable
+            name="recommendedSerVicesAdapter"
+            type="com.gox.app.adapter.RecommendedServiceAdapter" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_background_color"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/homefrg_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:minHeight="?attr/actionBarSize"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:titleTextAppearance="@style/MediumText">
+
+                <LinearLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        style="@style/SmallText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:drawableStart="@drawable/ic_location"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:drawableTint="@color/colorPrimary"
+                        android:text="@string/location"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/location_homefragment_tv"
+                        style="@style/SmallText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
+                        android:drawableEnd="@drawable/ic_down_arrow"
+                        android:drawablePadding="8dp"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="@string/user_main_loading"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <RelativeLayout
+                android:id="@+id/rlServiceRoot"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:elevation="@dimen/_2sdp"
+                android:background="@color/colorWhite"
+                android:animateLayoutChanges="true">
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/servicelist_frghome_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/_10sdp"
+                    android:adapter="@{serviceListAdapter}"
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/serviceslist_item_home"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="4" />
+
+                <TextView
+                    android:id="@+id/tvNoServiceFound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/no_service_found_contact_admin"
+                    android:visibility="gone" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/showmore_frghome_tv"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:elevation="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_minus20sdp"
+                android:background="@drawable/custom_roundcorner_button"
+                android:gravity="center"
+                android:layout_gravity="right"
+                android:onClick="@{() -> homefragmentmodel.showMoreLess()}"
+                android:text="@string/user_show_more"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_8sdp"
+                android:visibility="visible" />
+
+            <TextView
+                style="@style/BoldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/offers_coupons"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_12sdp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPagerCoupons"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_110sdp"
+                    android:adapter="@{homeCouponAdapter}" />
+
+                <!-- <com.github.florent37.materialleanback.MaterialLeanBack
+                      android:id="@+id/materialLeanBack"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:adapter="@{offersCouponsAdapter}"
+                      android:background="@android:color/transparent"
+                      android:visibility="gone"
+                      app:mlb_background="@android:color/transparent"
+                      app:mlb_backgroundOverlayColor="@android:color/transparent"
+                      app:mlb_paddingBottom="@dimen/_5sdp"
+                      app:mlb_paddingLeft="@dimen/_5sdp"
+                      app:mlb_paddingRight="@dimen/_5sdp"
+                      app:mlb_paddingTop="@dimen/_5sdp"
+                      app:mlb_titleColor="@android:color/white"
+                      tools:listitem="@layout/offers_list_item" />-->
+
+                <!-- <com.xjek.basemodule.ui.SnappingRecyclerView
+                     android:id="@+id/rv_offers_list"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_margin="@dimen/_5sdp"
+                     android:adapter="@{offersCouponsNewAdapter}"
+                     android:orientation="horizontal"
+                     android:overScrollMode="never"
+                     android:visibility="gone"
+                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                     tools:listitem="@layout/offers_list_item" />-->
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/BoldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/recommended_services"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_12sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recommended_servicelist_frghome_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:adapter="@{recommendedSerVicesAdapter}"
+                    android:overScrollMode="never"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/recommended_service_list" />
+
+
+                <RelativeLayout
+                    android:id="@+id/emptyRecommendedService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/bg_white"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/empty_box_view"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_gear" />
+
+                    <TextView
+                        android:id="@+id/coupon_code"
+                        style="@style/VerySmallText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/empty_box_view"
+                        android:layout_marginTop="@dimen/_35sdp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/empty_couponcode"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <!-- <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:gravity="center"
+                 android:orientation="vertical">
+
+                 <com.airbnb.lottie.LottieAnimationView
+                     android:id="@+id/home_lottieIndicator"
+                     android:layout_width="175dp"
+                     android:layout_height="175dp"
+                     android:visibility="visible"
+                     app:lottie_autoPlay="true"
+                     app:lottie_fileName="data.json"
+                     app:lottie_loop="true" />
+
+             </LinearLayout>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

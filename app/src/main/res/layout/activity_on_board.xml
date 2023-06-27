@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gox.app.ui.onboard.OnBoardViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_background_color"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/_5sdp"
+            android:orientation="vertical">
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_onboard"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="@dimen/_300sdp" />
+
+            <com.gox.app.ui.onboard.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_below="@+id/viewpager_onboard"
+                app:ci_animator="@animator/indicator_animator"
+                app:ci_animator_reverse="@animator/indicator_animator_reverse"
+                app:ci_drawable="@drawable/indicator_black"
+                app:ci_height="4dp"
+                app:ci_margin="6dp"
+                app:ci_width="10dp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp">
+
+            <Button
+                android:id="@+id/signup_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/signin_btn"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                style="@style/SmallText.Black"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/xuber_custom_round_corner"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="@{() -> viewModel.openSignUp()}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/button_textcolor"
+                android:textSize="@dimen/_12sdp" />
+
+            <Button
+                android:id="@+id/signin_btn"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/signleline_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@android:color/transparent"
+                android:elevation="@dimen/_10sdp"
+                style="@style/SmallText.Black"
+                android:onClick="@{() -> viewModel.openSignIn()}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/sign_in"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_12sdp" />
+
+            <View
+                android:id="@+id/signleline_view"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="#E4E4E4" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>
